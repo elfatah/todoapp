@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-
-
     <data>
-
         <variable
             name="toDo"
-            type="elfatahwashere.com.todoapp.ToDo" />
+            type="elfatahwashere.com.todoapp.data.ToDoRaw" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"

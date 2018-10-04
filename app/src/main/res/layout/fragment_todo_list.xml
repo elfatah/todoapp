@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".TodoListFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <elfatahwashere.com.todoapp.RefreshableList
+        android:id="@+id/rvTodo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical" />

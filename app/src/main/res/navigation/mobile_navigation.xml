@@ -21,8 +21,11 @@
         tools:layout="@layout/fragment_to_do_detail" >
         <argument
             android:name="toDoArgs"
-            app:argType="elfatahwashere.com.todoapp.ToDo"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:argType="elfatahwashere.com.todoapp.data.ToDo"
+            app:nullable="true" />
+        <deepLink
+            android:id="@+id/deepLink"
+            android:autoVerify="true"
+            app:uri="www.google.com/{toDoArgs}" />
     </fragment>
 </navigation>

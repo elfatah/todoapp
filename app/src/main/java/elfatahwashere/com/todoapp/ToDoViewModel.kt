@@ -1,32 +1,29 @@
 package elfatahwashere.com.todoapp
 
-import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.MutableLiveData
-import android.arch.paging.LivePagedListBuilder
-import android.arch.paging.PagedList
+import android.arch.lifecycle.ViewModel
+import elfatahwashere.com.todoapp.data.ToDoRaw
+import elfatahwashere.com.todoapp.repo.TodoRepository
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 /**
  * Created by hilman on 12/09/2018.
  */
-class ToDoViewModel(application: Application) : AndroidViewModel(application) {
+class ToDoViewModel(val todoRepository: TodoRepository) : ViewModel() {
 
-    private val dbase = AppDatabase.getAppDatabase(application)
-    private val toDoDao = dbase.todoDao()
+    fun add(toDo: ToDoRaw) = todoRepository.insertToDo(toDo)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
 
-    var todoLiveData = MutableLiveData<ToDo>()
+    fun delete(toDo: ToDoRaw) = todoRepository.deleteToDo(toDo)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
 
-    fun add(toDo: ToDo) = ioThread { toDoDao.addToDo(toDo) }
+    fun update(toDo: ToDoRaw) = todoRepository.editToDo(toDo)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
 
-    fun delete(toDo: ToDo) = ioThread { toDoDao.deleteToDo(toDo) }
-
-    fun update(toDo: ToDo) = ioThread { toDoDao.editTodo(toDo) }
-
-
-    val allTodo = LivePagedListBuilder(
-        toDoDao.getAllToDos(), PagedList.Config.Builder()
-            .setPageSize(10)
-            .setEnablePlaceholders(false)
-            .build()
-    ).build()
+    fun getAllTodo(page: Int) = todoRepository.getAllToDos(page)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
 }

@@ -1,9 +1,9 @@
 package elfatahwashere.com.todoapp
 
-import android.arch.lifecycle.LiveData
 import android.arch.paging.DataSource
 import android.arch.persistence.room.*
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
+import elfatahwashere.com.todoapp.data.ToDo
 
 
 /**
@@ -18,13 +18,13 @@ interface ToDoDao {
     fun getItemById(id: Int): ToDo
 
     @Insert(onConflict = REPLACE)
-    fun addToDo(toDo: ToDo)
+    fun insertToDo(toDo: ToDo)
 
     @Update
     fun editTodo(toDo: ToDo)
 
     @Insert(onConflict = REPLACE)
-    fun addToDo(toDos: List<ToDo>)
+    fun insertToDo(toDos: List<ToDo>)
 
     @Delete
     fun deleteToDo(toDo: ToDo)

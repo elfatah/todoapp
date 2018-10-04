@@ -1,10 +1,9 @@
-package elfatahwashere.com.todoapp
+package elfatahwashere.com.todoapp.data
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
-import java.util.*
 
 /**
  * Created by hilman on 12/09/2018.
@@ -12,6 +11,11 @@ import java.util.*
 @Entity(tableName = "ToDo")
 @Parcelize
 data class ToDo(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val name: String
+        @PrimaryKey(autoGenerate = true) val id: Int = 0,
+        val name: String
 ) : Parcelable
+
+fun ToDo.toRaw() =
+        with(this) {
+            ToDoRaw(id, name)
+        }
